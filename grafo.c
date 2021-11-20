@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #define true 1
 #define false 0
+#define BRANCO 0
+#define AMARELO 1
+#define VERMELHO 2
 typedef int bool;
 typedef int TIPOPESO;
 
@@ -67,9 +70,30 @@ void imprime(GRAFO *gr){
     }
 }
 
+void profundidade(GRAFO *g) {
+    int cor[g->vertices];
 
+    int u;
+    for (u = 0; u < g->vertices; u++){
+        cor[u] = BRANCO;
+    }
+    for (u = 0; u < g->vertices; u++){
+        if (cor[u] == BRANCO)
+            visitaP(g, u, cor);
+    }
 
+}
 
+void visitaP(GRAFO *g, int u, int *cor) {
+    cor[u] = AMARELO;
+    ADJACENCIA *v = g->adj[u].cab;
+    while(v){
+        if (cor[v->vertice] == BRANCO)
+            visitaP(g, v->vertice, cor);
+        v = v->prox;
+    }
+    cor[u] = VERMELHO;
+}
 
 
 
