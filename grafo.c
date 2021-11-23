@@ -16,7 +16,7 @@ typedef struct adjacencia{
 
 typedef struct vertice{
     // Dados armazenados vão aquo
-    ADJACENCIA *cab;
+    ADJACENCIA *head;
 } VERTICE;
 
 typedef struct grafo {
@@ -32,7 +32,7 @@ GRAFO *criaGrafo(int v) {
     g->adj = (VERTICE *) malloc(v*sizeof(VERTICE));
     int i;
     for (i = 0; i < v; i++)
-        g->adj[i].cab = NULL;
+        g->adj[i].head = NULL;
 }
 
 ADJACENCIA *criaAdj(int v, int peso) {
@@ -50,8 +50,8 @@ bool criaAresta(GRAFO *gr, int vi, int vf, TIPOPESO p){
     if ((vi<0) || (vi >= gr->vertices))
         return(false);
         ADJACENCIA *novo = criaAdj(vf, p);
-        novo->prox = gr->adj[vi].cab;
-        gr->adj[vi].cab = novo;
+        novo->prox = gr->adj[vi].head;
+        gr->adj[vi].head = novo;
         gr->arestas++;
         return(true);
 }
@@ -61,7 +61,7 @@ void imprime(GRAFO *gr){
     int i;
     for(i = 0; i < gr->vertices; i++){
         print("v%d: ", i);
-        ADJACENCIA *ad = gr->adj[i].cab;
+        ADJACENCIA *ad = gr->adj[i].head;
         while(ad){
             print("v%d(%d) ", ad->vertice, ad->peso);
             ad = ad->prox;
@@ -86,7 +86,7 @@ void profundidade(GRAFO *g) {
 
 void visitaP(GRAFO *g, int u, int *cor) {
     cor[u] = AMARELO;
-    ADJACENCIA *v = g->adj[u].cab;
+    ADJACENCIA *v = g->adj[u].head;
     while(v){
         if (cor[v->vertice] == BRANCO)
             visitaP(g, v->vertice, cor);
