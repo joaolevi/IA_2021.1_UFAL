@@ -14,7 +14,7 @@ GRAFO* geraGrafo(){
                          -1, -1, 143, -1, 98, 82, 120, -1, 0, -1,
                          80, 40, 48, -1, 80, 35, 57, -1, -1, 0};
     
-    GRAFO *gr = criaGrafo(50);
+    GRAFO *gr = criaGrafo(9);
     
     for(int i = 0; i < 11; i++){
         for(int j = 0; j < 11; j++){
@@ -22,5 +22,26 @@ GRAFO* geraGrafo(){
                 criaAresta(gr, i, j, matrix[i][j]);
         }
     }
+    return gr;
 }
 
+GRAFO* subida_da_encosta(GRAFO* g, int start_point){
+    
+    int oldWay_value, currWay_value, n_vert;
+    while(1){
+        GRAFO* temp = g;
+        while(1){
+            if(currWay_value > oldWay_value){
+                break;
+            }
+            VERTICE *v = &g->adj[n_vert];
+            
+        }
+    }
+}
+
+int main(){
+
+    GRAFO *g = geraGrafo();
+    imprime(g);
+}

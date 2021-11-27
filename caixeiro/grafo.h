@@ -14,7 +14,7 @@ typedef struct adjacencia{
 typedef struct vertice{
     // Dados armazenados vão aqui
     // int cor;
-    // bool visitado;
+    bool visitado;
     int ch;
     ADJACENCIA *head;
 } VERTICE;
@@ -54,7 +54,7 @@ bool criaAresta(GRAFO *gr, int vi, int vf, TIPOPESO p){
         novo->prox = gr->adj[vi].head;
         gr->adj[vi].head = novo;
         // gr->adj[vi].cor = c;
-        // gr->adj[vi].visitado = false;
+        gr->adj[vi].visitado = false;
         gr->adj[vi].ch = vi;
         gr->arestas++;
         return(true);
